@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" minHeight="187.0" onKeyPressed="#enter" prefHeight="204.00009999999747" prefWidth="477.0" spacing="2.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.rothar.simplehomebook.controller.LoginController">
+  <children>
+    <AnchorPane minHeight="37.0" prefHeight="65.0" prefWidth="437.0">
+      <children>
+        <Label layoutX="138.0" layoutY="3.0" minHeight="37.0" prefHeight="37.0" prefWidth="162.0" text="Bienvenido" textAlignment="CENTER">
+          <font>
+            <Font name="System Bold" size="30.0" />
+          </font>
+        </Label>
+      </children>
+      <padding>
+        <Insets />
+      </padding>
+      <VBox.margin>
+        <Insets bottom="10.0" />
+      </VBox.margin>
+    </AnchorPane>
+    <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="437.0" spacing="5.0">
+      <children>
+        <Label text="User">
+          <font>
+            <Font name="System Bold" size="15.0" fx:id="x1" />
+          </font>
+        </Label>
+        <TextField fx:id="loginUser" prefWidth="200.0" />
+      </children>
+    </HBox>
+    <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="437.0" spacing="5.0">
+      <children>
+        <Label font="$x1" text="Pass" />
+        <PasswordField id="Login_Pass" fx:id="loginPass" prefWidth="200.0" />
+      </children>
+    </HBox>
+    <VBox alignment="BOTTOM_CENTER" minHeight="20.0" prefHeight="20.0" prefWidth="437.0">
+      <children>
+        <Label fx:id="lblError" font="$x1" text="El usuario es incorrecto" textAlignment="CENTER" textFill="RED" visible="false" wrapText="false" />
+      </children>
+    </VBox>
+    <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="71.0" prefWidth="437.0" spacing="10.0">
+      <children>
+        <Button fx:id="bttLogin" font="$x1" minHeight="51.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="51.000099999997474" prefWidth="51.0" text="" textFill="#009962">
+          <graphic>
+            <ImageView fitHeight="53.0" fitWidth="53.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@login.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button id="bttCancel" fx:id="btnCrear" font="$x1" minHeight="51.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#crear" prefHeight="51.0" prefWidth="51.0" text="">
+          <graphic>
+            <ImageView fitHeight="67.0" fitWidth="67.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@createP.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <HBox alignment="CENTER_RIGHT" fillHeight="false" prefHeight="58.0" prefWidth="315.0" spacing="10.0">
+          <children>
+            <Button fx:id="bttCancel" font="$x1" minHeight="49.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="49.0" prefWidth="51.0" text="" textFill="#990000">
+              <graphic>
+                <ImageView fitHeight="51.0" fitWidth="51.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@exit.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+          </children>
+        </HBox>
+      </children>
+    </HBox>
+  </children>
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" />
+  </padding>
+</VBox>

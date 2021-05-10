@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.lang.String?>
+<?import javafx.collections.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_LEFT" minHeight="-1.0" onKeyPressed="#enter" prefHeight="385.0000999999975" prefWidth="403.0" spacing="0.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.rothar.simplehomebook.controller.NuevoController">
+  <children>
+    <Pane prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <Label layoutX="110.0" layoutY="6.0" text="Nuevo Recibo">
+          <font>
+            <Font name="System Bold" size="30.0" />
+          </font>
+        </Label>
+      </children>
+    </Pane>
+    <Pane prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <HBox layoutX="7.0" layoutY="14.0" prefHeight="212.0" prefWidth="395.0" spacing="0.0">
+          <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="215.0" prefWidth="75.0" spacing="12.0">
+              <children>
+                <Label text="Año" />
+                <Label text="Mes" />
+                <Label text="Tipo" />
+                <Label prefHeight="40.0" text="Url" />
+                <Label prefHeight="27.0" text="Importe" />
+                <Label prefHeight="20.0" text="Pagado" />
+              </children>
+            </VBox>
+            <VBox fillWidth="false" prefHeight="209.0" prefWidth="311.0" spacing="10.0">
+              <children>
+                <ComboBox id="colAnio" fx:id="comAnio" prefWidth="150.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <ComboBox id="colAnio" fx:id="comMes" prefWidth="150.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Enero" />
+                      <String fx:value="Febrero" />
+                      <String fx:value="Marzo" />
+                      <String fx:value="Abril" />
+                      <String fx:value="Junio" />
+                      <String fx:value="Julio" />
+                      <String fx:value="Agosto" />
+                      <String fx:value="Septiembre" />
+                      <String fx:value="Octubre" />
+                      <String fx:value="Noviembre" />
+                      <String fx:value="Diciembre" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <ComboBox id="colAnio" fx:id="comTipo" prefWidth="150.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Luz" />
+                      <String fx:value="Gas" />
+                      <String fx:value="Agua" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <HBox id="btnFile" alignment="CENTER_LEFT" prefHeight="39.90234375" prefWidth="307.0" spacing="10.0">
+                  <children>
+                    <TextArea fx:id="textUrl" prefHeight="40.0" prefWidth="250.0" wrapText="true" />
+                    <Button fx:id="btnFile" minHeight="27.0" minWidth="31.0" mnemonicParsing="false" onMouseClicked="#fileSearch" prefHeight="34.0" prefWidth="38.0" text="">
+                      <graphic>
+                        <ImageView fitHeight="46.5" fitWidth="62.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                            <Image url="@folder.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
+                  </children>
+                </HBox>
+                <HBox prefHeight="26.951171875" prefWidth="200.0" spacing="5.0">
+                  <children>
+                    <TextField fx:id="textImporte" alignment="CENTER_RIGHT" editable="true" onKeyTyped="#numericValidation" prefWidth="103.0" text="" />
+                    <Label prefHeight="25.0" text="€">
+                      <font>
+                        <Font name="System Bold" size="15.0" fx:id="x1" />
+                      </font>
+                    </Label>
+                  </children>
+                </HBox>
+                <CheckBox fx:id="chkPagado" mnemonicParsing="false" text="" />
+              </children>
+            </VBox>
+          </children>
+        </HBox>
+      </children>
+    </Pane>
+    <Pane prefHeight="39.90234375" prefWidth="403.0">
+      <children>
+        <Label fx:id="lblError" layoutX="7.0" layoutY="5.0" prefHeight="27.0" prefWidth="373.0" text="Se ha producido un error" textAlignment="RIGHT" textFill="#ff3333" visible="false" wrapText="false" />
+      </children>
+    </Pane>
+    <Pane prefHeight="67.0001220703125" prefWidth="403.0">
+      <children>
+        <Button fx:id="btnSalir" font="$x1" layoutX="338.0" layoutY="7.0" minHeight="46.0" minWidth="38.0" mnemonicParsing="false" onMouseClicked="#salir" prefHeight="47.0" prefWidth="51.0" text="" textFill="#cc0000">
+          <graphic>
+            <ImageView fitHeight="53.0" fitWidth="53.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@exit.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="btnAceptar" font="$x1" layoutX="7.0" layoutY="8.0" minHeight="46.0" minWidth="38.0" mnemonicParsing="false" onMouseClicked="#aceptar" prefHeight="46.0" prefWidth="45.0" text="" textFill="#009918">
+          <graphic>
+            <ImageView fitHeight="45.0" fitWidth="45.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@add.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="btnLimpiar" font="$x1" layoutX="60.0" layoutY="7.0" minHeight="39.90234375" minWidth="38.0" mnemonicParsing="false" onMouseClicked="#limpiar" prefHeight="47.0" prefWidth="45.0" text="" textFill="BLACK">
+          <graphic>
+            <ImageView fitHeight="46.0" fitWidth="46.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@del.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </children>
+    </Pane>
+  </children>
+  <padding>
+    <Insets />
+  </padding>
+</VBox>
