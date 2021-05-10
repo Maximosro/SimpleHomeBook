@@ -45,23 +45,23 @@ public class Utils {
 	}
 	
 	public String getNameMonth(String mes) {
-		if (mes.equals("01")) {
+		if (mes.equals("01") || mes.equals("1")) {
 			return "Enero";
-		} else if (mes.equals("02")) {
+		} else if (mes.equals("02")|| mes.equals("2")) {
 			return "Febrero";
-		} else if (mes.equals("03")) {
+		} else if (mes.equals("03")|| mes.equals("3")) {
 			return "Marzo";
-		} else if (mes.equals("04")) {
+		} else if (mes.equals("04")|| mes.equals("4")) {
 			return "Abril";
-		} else if (mes.equals("05")) {
+		} else if (mes.equals("05")|| mes.equals("5")) {
 			return "Mayo";
-		} else if (mes.equals("06")) {
+		} else if (mes.equals("06")|| mes.equals("6")) {
 			return "Junio";
-		} else if (mes.equals("07")) {
+		} else if (mes.equals("07")|| mes.equals("7")) {
 			return "Julio";
-		} else if (mes.equals("08")) {
+		} else if (mes.equals("08")|| mes.equals("8")) {
 			return "Agosto";
-		} else if (mes.equals("09")) {
+		} else if (mes.equals("09")|| mes.equals("9")) {
 			return "Septiembre";
 		} else if (mes.equals("10")) {
 			return "Octubre";
