@@ -1,2 +1,2 @@
-# SimpleHomeBook
-Programa portable para contabilidad simple
+# javafx-weaver-example
+Example repository for blog post about Spring Boot and JavaFX integration
