@@ -14,10 +14,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
 import com.rothar.simplehomebook.service.ReciboService;
+import com.rothar.simplehomebook.service.TipoService;
 import com.rothar.simplehomebook.util.Utils;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -36,9 +38,10 @@ import net.rgielen.fxweaver.core.FxmlView;
 public class NuevoController extends Application {
 
 	@Autowired
-	public NuevoController(ReciboService service, Utils util) {
+	public NuevoController(ReciboService service, TipoService tipoS, Utils util) {
 		this.service = service;
 		this.util = util;
+		this.tipoS = tipoS;
 	}
 
 	boolean multipleMonth = false;
@@ -48,6 +51,7 @@ public class NuevoController extends Application {
 
 	ReciboService service;
 	Utils util;
+	TipoService tipoS;
 
 	@FXML
 	Label lblError;
@@ -92,7 +96,13 @@ public class NuevoController extends Application {
 				.capitalize(LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"))));
 		comMes2.setValue(StringUtils
 				.capitalize(LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"))));
-		multipleMonth=false;
+		multipleMonth = false;
+		refreshTipos();
+	}
+
+	private void refreshTipos() {
+		comTipo.getItems().clear();
+		comTipo.setItems(FXCollections.observableArrayList(tipoS.getAllTipos()));
 	}
 
 	@FXML
@@ -108,14 +118,14 @@ public class NuevoController extends Application {
 				if (numMes1 >= numMes2) {
 					util.mostrarError(lblError, "El mes inicio es mayor o igual que el mes final", false);
 				} else {
-					Integer numMeses = (numMes2 - numMes1)+1;
+					Integer numMeses = (numMes2 - numMes1) + 1;
 					BigDecimal importe = new BigDecimal(textImporte.getText());
 					BigDecimal importePorMes = importe.divide(BigDecimal.valueOf(numMeses));
 					for (Integer i = numMes1; i <= numMes2; i++) {
-						service.insertar(comAnio.getValue(), util.getNameMonth(i.toString()), comTipo.getValue(), importePorMes,
-								chkPagado.isSelected(), textUrl.getText());
+						service.insertar(comAnio.getValue(), util.getNameMonth(i.toString()), comTipo.getValue(),
+								importePorMes, chkPagado.isSelected(), textUrl.getText());
 					}
-					out=true;
+					out = true;
 				}
 
 			}
@@ -162,6 +172,30 @@ public class NuevoController extends Application {
 	private void more() throws IOException {
 		comMes2.setVisible(true);
 		multipleMonth = true;
+	}
+	
+	@FXML
+	private void nuevoTipo() throws IOException {
+		try {
+			if(tipoS.create(comTipo.getValue())) {
+				util.mostrarError(lblError, "Nuevo Tipo creado correctamente", true);
+				refreshTipos();
+			}
+		} catch (Exception e) {
+			util.mostrarError(lblError, "No se ha podido crear el tipo", false);
+		}
+	}
+	
+	@FXML
+	private void eliminarTipo() throws IOException {
+		try {
+			if(tipoS.delTipoByName(comTipo.getValue())) {
+				util.mostrarError(lblError, "Nuevo Tipo borrado correctamente", true);
+				refreshTipos();
+			}
+		} catch (Exception e) {
+			util.mostrarError(lblError, e.getMessage(), false);
+		}
 	}
 
 	@FXML

@@ -20,10 +20,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_LEFT" minHeight="-1.0" onKeyPressed="#enter" prefHeight="385.0000999999975" prefWidth="403.0" spacing="0.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.rothar.simplehomebook.controller.NuevoController">
+<VBox alignment="TOP_LEFT" minHeight="-1.0" onKeyPressed="#enter" prefHeight="384.999977929685" prefWidth="403.0" spacing="0.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.rothar.simplehomebook.controller.NuevoController">
   <children>
     <Pane prefHeight="-1.0" prefWidth="-1.0">
       <children>
@@ -38,29 +39,25 @@
       <children>
         <HBox layoutX="7.0" layoutY="14.0" prefHeight="212.0" prefWidth="395.0" spacing="0.0">
           <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="215.0" prefWidth="75.0" spacing="12.0">
+            <VBox fillWidth="false" prefHeight="212.0" prefWidth="395.0" spacing="10.0">
               <children>
-                <Label text="Año" />
-                <Label text="Mes" />
-                <Label text="Tipo" />
-                <Label prefHeight="40.0" text="Url" />
-                <Label prefHeight="27.0" text="Importe" />
-                <Label prefHeight="20.0" text="Pagado" />
-              </children>
-            </VBox>
-            <VBox fillWidth="false" prefHeight="209.0" prefWidth="311.0" spacing="10.0">
-              <children>
-                <ComboBox id="colAnio" fx:id="comAnio" prefWidth="119.5">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="298.0" spacing="10.0">
+                <HBox prefHeight="26.0" prefWidth="395.0" spacing="10.0">
                   <children>
+                    <Label prefWidth="53.0" text="Año" />
+                    <ComboBox id="colAnio" fx:id="comAnio" prefWidth="119.99990000000253">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="Item 1" />
+                          <String fx:value="Item 2" />
+                          <String fx:value="Item 3" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                  </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="395.0" spacing="10.0">
+                  <children>
+                    <Label prefWidth="53.0" text="Mes" />
                     <ComboBox id="colAnio" fx:id="comMes" prefWidth="120.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -110,17 +107,44 @@
                     </ComboBox>
                   </children>
                 </HBox>
-                <ComboBox id="colAnio" fx:id="comTipo" prefWidth="120.0">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Luz" />
-                      <String fx:value="Gas" />
-                      <String fx:value="Agua" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <HBox id="btnFile" alignment="CENTER_LEFT" prefHeight="39.90234375" prefWidth="307.0" spacing="10.0">
+                <HBox prefHeight="27.0" prefWidth="395.0" spacing="10.0">
                   <children>
+                    <Label prefWidth="53.0" text="Tipo" />
+                    <ComboBox id="colAnio" fx:id="comTipo" editable="true" prefWidth="119.99990000000253">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="Luz" />
+                          <String fx:value="Gas" />
+                          <String fx:value="Agua" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                    <Button id="btnAceptar" fx:id="buttonTipo" font="$x1" minHeight="25.0" minWidth="27.0" mnemonicParsing="false" onMouseClicked="#nuevoTipo" prefHeight="25.0" prefWidth="27.0" text="">
+                      <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="27.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                            <Image url="@add.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                      <textFill>
+                        <Color blue="0.094" green="0.600" red="0.000" fx:id="x2" />
+                      </textFill>
+                    </Button>
+                    <Button id="btnLimpiar" fx:id="buttonDelTipo" font="$x1" minHeight="25.0" minWidth="24.0" mnemonicParsing="false" onMouseClicked="#eliminarTipo" prefHeight="25.0" prefWidth="24.0" text="" textFill="BLACK">
+                      <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                            <Image url="@del.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
+                  </children>
+                </HBox>
+                <HBox id="btnFile" alignment="CENTER_LEFT" prefHeight="39.90234375" prefWidth="395.0" spacing="10.0">
+                  <children>
+                    <Label prefHeight="40.0" prefWidth="51.000099999997474" text="Url" />
                     <TextArea fx:id="textUrl" prefHeight="40.0" prefWidth="250.0" wrapText="true" />
                     <Button fx:id="btnFile" minHeight="27.0" minWidth="31.0" mnemonicParsing="false" onMouseClicked="#fileSearch" prefHeight="34.0" prefWidth="38.0" text="">
                       <graphic>
@@ -133,13 +157,19 @@
                     </Button>
                   </children>
                 </HBox>
-                <HBox prefHeight="26.951171875" prefWidth="200.0" spacing="5.0">
+                <HBox prefHeight="27.0" prefWidth="395.0" spacing="10.0">
                   <children>
-                    <TextField fx:id="textImporte" alignment="CENTER_RIGHT" editable="true" onKeyTyped="#numericValidation" prefWidth="103.0" text="" />
+                    <Label prefHeight="27.0" prefWidth="53.0" text="Importe" />
+                    <TextField fx:id="textImporte" alignment="CENTER_RIGHT" editable="true" onKeyTyped="#numericValidation" prefWidth="105.0" text="" />
                     <Label font="$x1" prefHeight="25.0" text="€" />
                   </children>
                 </HBox>
-                <CheckBox fx:id="chkPagado" mnemonicParsing="false" text="" />
+                <HBox prefHeight="20.0" prefWidth="395.0" spacing="10.0">
+                  <children>
+                    <Label prefHeight="20.0" prefWidth="53.0" text="Pagado" />
+                    <CheckBox fx:id="chkPagado" mnemonicParsing="false" text="" />
+                  </children>
+                </HBox>
               </children>
             </VBox>
           </children>
@@ -148,10 +178,10 @@
     </Pane>
     <Pane prefHeight="39.90234375" prefWidth="403.0">
       <children>
-        <Label fx:id="lblError" layoutX="7.0" layoutY="5.0" prefHeight="27.0" prefWidth="373.0" text="Se ha producido un error" textAlignment="RIGHT" textFill="#ff3333" visible="false" wrapText="false" />
+        <Label fx:id="lblError" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="5.0" prefHeight="27.0" prefWidth="373.0" text="Se ha producido un error" textAlignment="CENTER" textFill="#ff3333" visible="false" wrapText="false" />
       </children>
     </Pane>
-    <Pane prefHeight="67.0001220703125" prefWidth="403.0">
+    <Pane prefHeight="73.0" prefWidth="403.0">
       <children>
         <Button fx:id="btnSalir" font="$x1" layoutX="338.0" layoutY="7.0" minHeight="46.0" minWidth="38.0" mnemonicParsing="false" onMouseClicked="#salir" prefHeight="47.0" prefWidth="51.0" text="" textFill="#cc0000">
           <graphic>
@@ -162,7 +192,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="btnAceptar" font="$x1" layoutX="7.0" layoutY="8.0" minHeight="46.0" minWidth="38.0" mnemonicParsing="false" onMouseClicked="#aceptar" prefHeight="46.0" prefWidth="45.0" text="" textFill="#009918">
+        <Button fx:id="btnAceptar" font="$x1" layoutX="7.0" layoutY="8.0" minHeight="46.0" minWidth="38.0" mnemonicParsing="false" onMouseClicked="#aceptar" prefHeight="46.0" prefWidth="45.0" text="" textFill="$x2">
           <graphic>
             <ImageView fitHeight="45.0" fitWidth="45.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
               <image>

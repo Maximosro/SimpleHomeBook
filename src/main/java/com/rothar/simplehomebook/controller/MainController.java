@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import com.rothar.simplehomebook.entity.Recibo;
 import com.rothar.simplehomebook.service.ReciboService;
+import com.rothar.simplehomebook.service.TipoService;
 import com.rothar.simplehomebook.util.Utils;
 import com.rothar.simplehomebook.util.WindowUtils;
 
@@ -38,15 +39,18 @@ public class MainController extends Application {
 	boolean ejecutado = false;
 
 	@Autowired
-	public MainController(ReciboService service, WindowUtils wUtil, Utils util) {
+	public MainController(ReciboService service, TipoService tipoS, WindowUtils wUtil, Utils util) {
 		this.service = service;
 		this.wUtil = wUtil;
 		this.util = util;
+		this.tipoS = tipoS;
 	}
 
 	WindowUtils wUtil;
 
 	ReciboService service;
+	
+	TipoService tipoS;
 
 	Utils util;
 
@@ -82,6 +86,13 @@ public class MainController extends Application {
 		comboAnio.setItems(FXCollections.observableArrayList(util.generateListYears()));
 		int y = Calendar.getInstance().get(Calendar.YEAR);
 		comboAnio.setValue("" + y);
+		comboTipo.getItems().clear();
+		comboTipo.setItems(getTipos());
+		
+	}
+	
+	private ObservableList<String> getTipos() {
+		return FXCollections.observableArrayList(tipoS.getAllTipos());
 	}
 
 	@FXML

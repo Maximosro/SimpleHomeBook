@@ -22,6 +22,9 @@ public class ReciboService {
 	ReciboRepository repo;
 
 	@Autowired
+	TipoService tipoS;
+
+	@Autowired
 	Utils util;
 
 	public List<Recibo> buscar(String anio, String mes, String tipo, Boolean pagado) {
@@ -39,12 +42,13 @@ public class ReciboService {
 		if (pagado != null) {
 			r.setPagado(pagado);
 		}
-		List<Order> ordenacion =  new ArrayList<Sort.Order>();
+		List<Order> ordenacion = new ArrayList<Sort.Order>();
 		ordenacion.add(Order.desc("anio"));
 		ordenacion.add(Order.asc("mes"));
-		out = repo.findAll(Example.of(r),Sort.by(ordenacion));
+		out = repo.findAll(Example.of(r), Sort.by(ordenacion));
 		out.parallelStream().forEach(rec -> {
 			rec.setMes(util.getNameMonth(rec.getMes()));
+			rec.setTipo(tipoS.getTipoById(rec.getTipo()).getTipo());
 		});
 		return out;
 	}
@@ -66,7 +70,7 @@ public class ReciboService {
 		r.setImporte(importe);
 		r.setMes(util.getNumberMonth(mes));
 		r.setPagado(pagado);
-		r.setTipo(tipo);
+		r.setTipo(tipoS.getTipoByName(tipo).getId());
 		r.setUrl(url);
 		return repo.save(r) != null;
 	}

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rothar.simplehomebook.entity.Login;
 import com.rothar.simplehomebook.repository.LoginRepository;
+import com.rothar.simplehomebook.util.Cache;
 import com.rothar.simplehomebook.util.CryptoUtils;
 
 @Service
@@ -15,6 +16,9 @@ public class LoginService {
 
 	@Autowired
 	CryptoUtils cryptoUtils;
+	
+	@Autowired
+	Cache cache;
 
 	@Autowired
 	LoginRepository repo;
@@ -29,6 +33,7 @@ public class LoginService {
 			String userBeanPass = Base64.getEncoder().encodeToString(userBean.get().getPass());
 			String userBeanPass2 = Base64.getEncoder().encodeToString(cryptoPass);
 			if (user.equals(userBean.get().getUser()) && userBeanPass2.equals(userBeanPass)) {
+				cache.setUsuarioConectado(userBean.get());
 				return true;
 			} else {
 				return false;
@@ -43,6 +48,7 @@ public class LoginService {
 			Login l = new Login();
 			l.setPass(cryptoUtils.encodePass(pass));
 			l.setUser(user);
+			l.setSuperuser(false);
 			Login out = repo.save(l);
 			if (out == null) {
 				return false;
