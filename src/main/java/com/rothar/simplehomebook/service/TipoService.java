@@ -32,9 +32,9 @@ public class TipoService {
 				.save(new Tipo(UUID.randomUUID().toString(), name, cache.getUsuarioConectado().getUser())) != null;
 	}
 
-	public Boolean delTipoByName(String name) throws Exception{
+	public Boolean delTipoByName(String name) throws Exception {
 		List<Tipo> out = repository.findAll(Example.of(new Tipo(null, name, cache.getUsuarioConectado().getUser())));
-		if(out==null || out.isEmpty()) {
+		if (out == null || out.isEmpty()) {
 			throw new Exception("No se ha encontrado ningun registro para borrar");
 		}
 		out.stream().forEach(item -> {
@@ -47,17 +47,20 @@ public class TipoService {
 		return repository.findById(id).get();
 	}
 
-	public Tipo getTipoByName(String name) throws Exception {
+	public Tipo getTipoByName(String name) {
 		List<Tipo> out = repository.findAll(Example.of(new Tipo(null, name, cache.getUsuarioConectado().getUser())));
 		if (out != null && !out.isEmpty()) {
 			return out.get(0);
 		} else {
-			throw new Exception("Tipo no encontrado");
+			return new Tipo("", "", "");
 		}
 	}
 
-	public List<String> getAllTipos() {
+	public List<String> getAllTipos(boolean editable) {
 		List<String> listOut = new ArrayList<String>();
+		if (!editable) {
+			listOut.add("Todos");
+		}
 		List<Tipo> out = repository.findAll(Example.of(new Tipo(null, null, cache.getUsuarioConectado().getUser())));
 		if (out != null && !out.isEmpty()) {
 			out.parallelStream().forEach(item -> {

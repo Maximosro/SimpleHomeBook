@@ -10,16 +10,17 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
 import com.rothar.simplehomebook.service.ReciboService;
 import com.rothar.simplehomebook.service.TipoService;
+import com.rothar.simplehomebook.service.VariableService;
+import com.rothar.simplehomebook.util.Cache;
 import com.rothar.simplehomebook.util.Utils;
+import com.rothar.simplehomebook.util.WindowUtils;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -38,20 +39,24 @@ import net.rgielen.fxweaver.core.FxmlView;
 public class NuevoController extends Application {
 
 	@Autowired
-	public NuevoController(ReciboService service, TipoService tipoS, Utils util) {
+	public NuevoController(ReciboService service, VariableService varService, TipoService tipoS, Utils util,
+			Cache cache, WindowUtils wUtil) {
 		this.service = service;
 		this.util = util;
 		this.tipoS = tipoS;
+		this.cache = cache;
+		this.wUtil = wUtil;
+		this.varService = varService;
 	}
 
 	boolean multipleMonth = false;
 
-	@Value("${app.path}")
-	String pathInicial;
-
 	ReciboService service;
 	Utils util;
 	TipoService tipoS;
+	Cache cache;
+	WindowUtils wUtil;
+	VariableService varService;
 
 	@FXML
 	Label lblError;
@@ -102,7 +107,7 @@ public class NuevoController extends Application {
 
 	private void refreshTipos() {
 		comTipo.getItems().clear();
-		comTipo.setItems(FXCollections.observableArrayList(tipoS.getAllTipos()));
+		comTipo.setItems(FXCollections.observableArrayList(tipoS.getAllTipos(true)));
 	}
 
 	@FXML
@@ -145,16 +150,18 @@ public class NuevoController extends Application {
 	private void fileSearch() throws Exception {
 		Stage stage = (Stage) btnSalir.getScene().getWindow();
 		FileChooser fileComponent = new FileChooser();
-		File f = new File(pathInicial);
+		File f = new File(varService.getVariable("RECIBOS_PATH").getValor());
 		if (f.isDirectory() && f.exists()) {
 			fileComponent.setInitialDirectory(f);
 			fileComponent.setTitle("Busqueda Recibos");
 			File file = fileComponent.showOpenDialog(stage.getOwner());
 			if (file != null) {
 				textUrl.setText(file.getAbsolutePath());
+				varService.crearVariable("RECIBOS_PATH", file.getParent());
 			}
 		} else {
-			util.mostrarError(lblError, "No hay un directorio base configurado", false);
+			varService.crearVariable("RECIBOS_PATH", "C:\\");
+			fileSearch();
 		}
 
 	}
@@ -173,11 +180,11 @@ public class NuevoController extends Application {
 		comMes2.setVisible(true);
 		multipleMonth = true;
 	}
-	
+
 	@FXML
 	private void nuevoTipo() throws IOException {
 		try {
-			if(tipoS.create(comTipo.getValue())) {
+			if (tipoS.create(comTipo.getValue())) {
 				util.mostrarError(lblError, "Nuevo Tipo creado correctamente", true);
 				refreshTipos();
 			}
@@ -185,13 +192,17 @@ public class NuevoController extends Application {
 			util.mostrarError(lblError, "No se ha podido crear el tipo", false);
 		}
 	}
-	
+
 	@FXML
 	private void eliminarTipo() throws IOException {
 		try {
-			if(tipoS.delTipoByName(comTipo.getValue())) {
-				util.mostrarError(lblError, "Nuevo Tipo borrado correctamente", true);
-				refreshTipos();
+			if (service.existeTipo(comTipo.getValue())) {
+				util.mostrarError(lblError, "Error al borrar, tipo está en uso", false);
+			} else {
+				if (tipoS.delTipoByName(comTipo.getValue())) {
+					util.mostrarError(lblError, "Tipo borrado correctamente", true);
+					refreshTipos();
+				}
 			}
 		} catch (Exception e) {
 			util.mostrarError(lblError, e.getMessage(), false);
@@ -201,7 +212,12 @@ public class NuevoController extends Application {
 	@FXML
 	private void salir() throws IOException {
 		Stage stage = (Stage) btnSalir.getScene().getWindow();
-		stage.close();
+		if (cache.getVentanaPadre().equals("MENU")) {
+			cache.setVentanaPadre("");
+			wUtil.showWindow(stage, MenuController.class, false);
+		} else {
+			stage.close();
+		}
 	}
 
 	@FXML

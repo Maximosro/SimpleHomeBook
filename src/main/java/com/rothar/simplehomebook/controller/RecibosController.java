@@ -33,13 +33,13 @@ import net.rgielen.fxweaver.core.FxmlView;
 
 @Controller
 @FxmlView("main.fxml")
-public class MainController extends Application {
+public class RecibosController extends Application {
 
 	Logger log = LoggerFactory.getLogger(getClass());
 	boolean ejecutado = false;
 
 	@Autowired
-	public MainController(ReciboService service, TipoService tipoS, WindowUtils wUtil, Utils util) {
+	public RecibosController(ReciboService service, TipoService tipoS, WindowUtils wUtil, Utils util) {
 		this.service = service;
 		this.wUtil = wUtil;
 		this.util = util;
@@ -92,13 +92,13 @@ public class MainController extends Application {
 	}
 	
 	private ObservableList<String> getTipos() {
-		return FXCollections.observableArrayList(tipoS.getAllTipos());
+		return FXCollections.observableArrayList(tipoS.getAllTipos(false));
 	}
 
 	@FXML
 	private void cancel() throws IOException {
 		Stage stage = (Stage) btnSalir.getScene().getWindow();
-		stage.close();
+		wUtil.showWindow(stage, MenuController.class, false);
 	}
 
 	@FXML

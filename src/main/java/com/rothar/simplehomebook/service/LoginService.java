@@ -43,12 +43,12 @@ public class LoginService {
 		}
 	}
 
-	public boolean createUser(String user, String pass) {
+	public boolean createUser(String user, String pass, boolean adm) {
 		try {
 			Login l = new Login();
 			l.setPass(cryptoUtils.encodePass(pass));
 			l.setUser(user);
-			l.setSuperuser(false);
+			l.setSuperuser(adm);
 			Login out = repo.save(l);
 			if (out == null) {
 				return false;

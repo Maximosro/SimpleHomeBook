@@ -15,5 +15,7 @@ public class Cache {
 	boolean isLectura;
 	
 	Login usuarioConectado;
+	
+	String ventanaPadre  ="";
 
 }

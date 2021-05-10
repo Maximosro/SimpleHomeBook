@@ -16,11 +16,11 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" minHeight="187.0" onKeyPressed="#enter" prefHeight="204.00009999999747" prefWidth="477.0" spacing="2.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.rothar.simplehomebook.controller.LoginController">
+<VBox alignment="TOP_CENTER" minHeight="187.0" onKeyPressed="#enter" prefHeight="204.00009999999747" prefWidth="477.0" spacing="2.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.rothar.simplehomebook.controller.UsuarioController">
   <children>
-    <AnchorPane minHeight="37.0" prefHeight="65.0" prefWidth="437.0">
+    <AnchorPane minHeight="37.0" prefHeight="49.0" prefWidth="437.0">
       <children>
-        <Label layoutX="138.0" layoutY="3.0" minHeight="37.0" prefHeight="37.0" prefWidth="162.0" text="Bienvenido" textAlignment="CENTER">
+        <Label layoutX="113.0" layoutY="7.0" minHeight="37.0" prefHeight="37.0" prefWidth="211.0" text="Nuevo Usuario" textAlignment="CENTER">
           <font>
             <Font name="System Bold" size="30.0" />
           </font>
@@ -49,24 +49,25 @@
         <PasswordField id="Login_Pass" fx:id="loginPass" prefWidth="200.0" />
       </children>
     </HBox>
-    <VBox alignment="BOTTOM_CENTER" minHeight="20.0" prefHeight="20.0" prefWidth="437.0">
+    <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="437.0" spacing="5.0">
       <children>
-        <Label fx:id="lblError" font="$x1" text="El usuario es incorrecto" textAlignment="CENTER" textFill="RED" visible="false" wrapText="false" />
+        <CheckBox fx:id="chkAdmin" mnemonicParsing="false" prefWidth="233.0" text="Administrador" />
       </children>
-    </VBox>
-    <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="71.0" prefWidth="437.0" spacing="10.0">
+    </HBox>
+    <HBox alignment="CENTER_LEFT" fillHeight="false" minHeight="43.0" prefHeight="43.0" prefWidth="437.0" spacing="10.0">
       <children>
-        <Button fx:id="bttLogin" font="$x1" minHeight="51.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="51.000099999997474" prefWidth="51.0" text="" textFill="#009962">
+        <Button id="bttCancel" fx:id="btnCrear" font="$x1" minHeight="51.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#crear" prefHeight="51.0" prefWidth="51.0" text="">
           <graphic>
-            <ImageView fitHeight="53.0" fitWidth="53.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="67.0" fitWidth="67.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@login.png" />
+                <Image url="@createP.png" />
               </image>
             </ImageView>
           </graphic>
         </Button>
-        <HBox alignment="CENTER_RIGHT" fillHeight="false" prefHeight="57.0" prefWidth="376.0" spacing="10.0">
+        <HBox alignment="CENTER_RIGHT" fillHeight="false" prefHeight="51.0" prefWidth="376.0" spacing="10.0">
           <children>
+            <Label fx:id="lblError" alignment="CENTER" font="$x1" prefWidth="315.0" text="Error al crear el usuario" textFill="RED" visible="false" />
             <Button fx:id="bttCancel" font="$x1" minHeight="49.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="49.0" prefWidth="51.0" text="" textFill="#990000">
               <graphic>
                 <ImageView fitHeight="51.0" fitWidth="51.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">

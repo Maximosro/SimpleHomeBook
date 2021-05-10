@@ -37,7 +37,7 @@ public class ReciboService {
 			r.setMes(util.getNumberMonth(mes));
 		}
 		if (tipo != null && !tipo.equalsIgnoreCase("Todos")) {
-			r.setTipo(tipo);
+			r.setTipo(tipoS.getTipoByName(tipo).getId());
 		}
 		if (pagado != null) {
 			r.setPagado(pagado);
@@ -73,6 +73,19 @@ public class ReciboService {
 		r.setTipo(tipoS.getTipoByName(tipo).getId());
 		r.setUrl(url);
 		return repo.save(r) != null;
+	}
+
+	public boolean existeTipo(String tipo) {
+		String idTipo = tipoS.getTipoByName(tipo).getId();
+		Recibo r = new Recibo();
+		r.setTipo(idTipo);
+		List<Recibo> out = repo.findAll(Example.of(r));
+		if (out != null && !out.isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 }

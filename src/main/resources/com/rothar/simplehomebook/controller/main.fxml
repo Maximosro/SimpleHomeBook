@@ -23,7 +23,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="749.0" prefWidth="740.0" spacing="0.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.rothar.simplehomebook.controller.MainController">
+<VBox alignment="TOP_CENTER" prefHeight="749.0" prefWidth="740.0" spacing="0.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.rothar.simplehomebook.controller.RecibosController">
   <children>
     <Pane prefHeight="51.0" prefWidth="1000.0">
       <children>
