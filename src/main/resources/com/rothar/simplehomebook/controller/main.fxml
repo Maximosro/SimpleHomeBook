@@ -99,7 +99,7 @@
                 <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="121.0" text="Año" fx:id="colAnio" />
                 <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="106.0" text="Mes" fx:id="colMes" />
                 <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="91.0" text="Tipo" fx:id="colTipo" />
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="135.0" text="Importe" fx:id="colImporte" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="135.0" text="Importe (€)" fx:id="colImporte" />
                 <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="187.0" resizable="false" text="Recibo" fx:id="colRecibo" />
                 <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="98.0" text="Pagado" fx:id="colPagado" />
               </columns>
