@@ -46,6 +46,7 @@
                   <String fx:value="Febrero" />
                   <String fx:value="Marzo" />
                   <String fx:value="Abril" />
+                  <String fx:value="Mayo" />
                   <String fx:value="Junio" />
                   <String fx:value="Julio" />
                   <String fx:value="Agosto" />

@@ -50,7 +50,7 @@
             </VBox>
             <VBox fillWidth="false" prefHeight="209.0" prefWidth="311.0" spacing="10.0">
               <children>
-                <ComboBox id="colAnio" fx:id="comAnio" prefWidth="150.0">
+                <ComboBox id="colAnio" fx:id="comAnio" prefWidth="119.5">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -59,24 +59,58 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="colAnio" fx:id="comMes" prefWidth="150.0">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Enero" />
-                      <String fx:value="Febrero" />
-                      <String fx:value="Marzo" />
-                      <String fx:value="Abril" />
-                      <String fx:value="Junio" />
-                      <String fx:value="Julio" />
-                      <String fx:value="Agosto" />
-                      <String fx:value="Septiembre" />
-                      <String fx:value="Octubre" />
-                      <String fx:value="Noviembre" />
-                      <String fx:value="Diciembre" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <ComboBox id="colAnio" fx:id="comTipo" prefWidth="150.0">
+                <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="298.0" spacing="10.0">
+                  <children>
+                    <ComboBox id="colAnio" fx:id="comMes" prefWidth="120.0">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="Enero" />
+                          <String fx:value="Febrero" />
+                          <String fx:value="Marzo" />
+                          <String fx:value="Abril" />
+                          <String fx:value="Mayo" />
+                          <String fx:value="Junio" />
+                          <String fx:value="Julio" />
+                          <String fx:value="Agosto" />
+                          <String fx:value="Septiembre" />
+                          <String fx:value="Octubre" />
+                          <String fx:value="Noviembre" />
+                          <String fx:value="Diciembre" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                    <Button fx:id="btnMore" minHeight="19.999900000002526" minWidth="24.0" mnemonicParsing="false" onMouseClicked="#more" prefHeight="25.0" prefWidth="24.0" text="">
+                      <font>
+                        <Font name="System Bold" size="15.0" fx:id="x1" />
+                      </font>
+                      <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                            <Image url="@plus.png" />
+                          </image>
+                        </ImageView>
+                      </graphic>
+                    </Button>
+                    <ComboBox id="colAnio" fx:id="comMes2" prefWidth="120.0" visible="false">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="Enero" />
+                          <String fx:value="Febrero" />
+                          <String fx:value="Marzo" />
+                          <String fx:value="Abril" />
+                          <String fx:value="Junio" />
+                          <String fx:value="Julio" />
+                          <String fx:value="Agosto" />
+                          <String fx:value="Septiembre" />
+                          <String fx:value="Octubre" />
+                          <String fx:value="Noviembre" />
+                          <String fx:value="Diciembre" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                  </children>
+                </HBox>
+                <ComboBox id="colAnio" fx:id="comTipo" prefWidth="120.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Luz" />
@@ -102,11 +136,7 @@
                 <HBox prefHeight="26.951171875" prefWidth="200.0" spacing="5.0">
                   <children>
                     <TextField fx:id="textImporte" alignment="CENTER_RIGHT" editable="true" onKeyTyped="#numericValidation" prefWidth="103.0" text="" />
-                    <Label prefHeight="25.0" text="€">
-                      <font>
-                        <Font name="System Bold" size="15.0" fx:id="x1" />
-                      </font>
-                    </Label>
+                    <Label font="$x1" prefHeight="25.0" text="€" />
                   </children>
                 </HBox>
                 <CheckBox fx:id="chkPagado" mnemonicParsing="false" text="" />

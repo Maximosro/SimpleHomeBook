@@ -41,6 +41,8 @@ public class NuevoController extends Application {
 		this.util = util;
 	}
 
+	boolean multipleMonth = false;
+
 	@Value("${app.path}")
 	String pathInicial;
 
@@ -76,6 +78,8 @@ public class NuevoController extends Application {
 	@FXML
 	ComboBox<String> comMes;
 	@FXML
+	ComboBox<String> comMes2;
+	@FXML
 	ComboBox<String> comTipo;
 
 	@FXML
@@ -86,14 +90,35 @@ public class NuevoController extends Application {
 		chkPagado.setSelected(true);
 		comMes.setValue(StringUtils
 				.capitalize(LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"))));
+		comMes2.setValue(StringUtils
+				.capitalize(LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"))));
+		multipleMonth=false;
 	}
 
 	@FXML
 	private void aceptar() throws Exception {
 		boolean out = false;
 		try {
-			out = service.insertar(comAnio.getValue(), comMes.getValue(), comTipo.getValue(),
-					new BigDecimal(textImporte.getText()), chkPagado.isSelected(), textUrl.getText());
+			if (!multipleMonth) {
+				out = service.insertar(comAnio.getValue(), comMes.getValue(), comTipo.getValue(),
+						new BigDecimal(textImporte.getText()), chkPagado.isSelected(), textUrl.getText());
+			} else {
+				Integer numMes1 = Integer.parseInt(util.getNumberMonth(comMes.getValue()));
+				Integer numMes2 = Integer.parseInt(util.getNumberMonth(comMes2.getValue()));
+				if (numMes1 >= numMes2) {
+					util.mostrarError(lblError, "El mes inicio es mayor o igual que el mes final", false);
+				} else {
+					Integer numMeses = (numMes2 - numMes1)+1;
+					BigDecimal importe = new BigDecimal(textImporte.getText());
+					BigDecimal importePorMes = importe.divide(BigDecimal.valueOf(numMeses));
+					for (Integer i = numMes1; i <= numMes2; i++) {
+						service.insertar(comAnio.getValue(), util.getNameMonth(i.toString()), comTipo.getValue(), importePorMes,
+								chkPagado.isSelected(), textUrl.getText());
+					}
+					out=true;
+				}
+
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -118,7 +143,7 @@ public class NuevoController extends Application {
 			if (file != null) {
 				textUrl.setText(file.getAbsolutePath());
 			}
-		}else {
+		} else {
 			util.mostrarError(lblError, "No hay un directorio base configurado", false);
 		}
 
@@ -129,7 +154,14 @@ public class NuevoController extends Application {
 		comTipo.setValue("");
 		textImporte.setText("");
 		textUrl.setText("");
+		comMes2.setVisible(false);
 		initialize();
+	}
+
+	@FXML
+	private void more() throws IOException {
+		comMes2.setVisible(true);
+		multipleMonth = true;
 	}
 
 	@FXML
