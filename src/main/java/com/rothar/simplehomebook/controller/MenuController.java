@@ -17,57 +17,74 @@ import net.rgielen.fxweaver.core.FxmlView;
 @Controller
 @FxmlView("menu.fxml")
 public class MenuController {
-	
 
 	Utils util;
 	WindowUtils wUtil;
 	Cache cache;
-	
+
 	@FXML
 	Button buttonRecibos;
 	@FXML
 	Button buttonUsuarios;
 	@FXML
 	Button buttonCrearRecibo;
+
+	@FXML
+	Button buttonAjustes;
+
 	@FXML
 	Button bttCancel;
 
 	@Autowired
-	public MenuController( Utils util , WindowUtils wUtil, Cache cache) {
-		this.util=util;
-		this.cache=cache;
-		this.wUtil=wUtil;
+	public MenuController(Utils util, WindowUtils wUtil, Cache cache) {
+		this.util = util;
+		this.cache = cache;
+		this.wUtil = wUtil;
 	}
 
+	@FXML
+	public void initialize() {
+		if (!cache.getUsuarioConectado().isSuperuser()) {
+			buttonUsuarios.setVisible(false);
+			buttonAjustes.setVisible(false);
+		}
+	}
 
 	@FXML
 	private void usuarios() throws IOException {
 		Stage stage = (Stage) bttCancel.getScene().getWindow();
 		wUtil.showWindow(stage, UsuarioController.class, false);
 	}
+
+	@FXML
+	private void ajustes() throws IOException {
+		Stage stage = (Stage) bttCancel.getScene().getWindow();
+		wUtil.showWindow(stage, AjustesController.class, false);
+	}
+
 	@FXML
 	private void recibos() throws IOException {
 		Stage stage = (Stage) bttCancel.getScene().getWindow();
 		wUtil.showWindow(stage, RecibosController.class, false);
 	}
-	
+
 	@FXML
 	private void sesion() throws IOException {
 		Stage stage = (Stage) bttCancel.getScene().getWindow();
 		wUtil.showWindow(stage, LoginController.class, false);
 	}
+
 	@FXML
 	private void crearRecibo() throws IOException {
 		Stage stage = (Stage) bttCancel.getScene().getWindow();
 		cache.setVentanaPadre("MENU");
 		wUtil.showWindow(stage, NuevoController.class, false);
 	}
+
 	@FXML
 	private void cancel() throws IOException {
 		Stage stage = (Stage) bttCancel.getScene().getWindow();
 		stage.close();
 	}
-
-	
 
 }

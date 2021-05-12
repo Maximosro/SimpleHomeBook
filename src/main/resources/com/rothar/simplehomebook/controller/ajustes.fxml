@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" minHeight="187.0" prefHeight="397.999977929685" prefWidth="644.0" spacing="2.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.rothar.simplehomebook.controller.AjustesController">
+  <children>
+    <AnchorPane minHeight="37.0" prefHeight="43.0" prefWidth="437.0">
+      <children>
+        <Label layoutX="249.0" layoutY="0.0" minHeight="37.0" prefHeight="37.0" prefWidth="105.5" text="Ajustes" textAlignment="CENTER">
+          <font>
+            <Font name="System Bold" size="30.0" />
+          </font>
+        </Label>
+      </children>
+      <padding>
+        <Insets fx:id="x2" />
+      </padding>
+      <VBox.margin>
+        <Insets bottom="5.0" />
+      </VBox.margin>
+    </AnchorPane>
+    <AnchorPane prefHeight="98.0" prefWidth="604.0" style="-fx-border-style: solid; -fx-border-width: 1; -fx-border-radius: 3;" VBox.margin="$x2">
+      <children>
+        <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="35.0" prefHeight="51.0" prefWidth="575.9999000000025" spacing="10.0">
+          <children>
+            <ComboBox fx:id="comboTipos" onAction="#selectTipos" prefWidth="157.0" promptText="Tipo">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <ComboBox fx:id="comboUser" disable="true" prefWidth="124.0" promptText="Usuario">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <TextField fx:id="textTipo" disable="true" prefWidth="178.0" />
+            <Button id="" fx:id="buttonCrearTipo" defaultButton="false" minHeight="37.0" minWidth="32.0" mnemonicParsing="false" onMouseClicked="#crearTipo" prefHeight="37.0" prefWidth="32.0" text="">
+              <font>
+                <Font name="System Bold" size="15.0" fx:id="x1" />
+              </font>
+              <graphic>
+                <ImageView fitHeight="35.0" fitWidth="35.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@edit.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Button id="bttCancel" fx:id="buttonEliminarTipo" font="$x1" minHeight="37.0" minWidth="32.0" mnemonicParsing="false" onMouseClicked="#eliminarTipo" prefHeight="37.0" prefWidth="32.0" text="">
+              <graphic>
+                <ImageView fitHeight="35.0" fitWidth="35.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@del.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+          </children>
+        </HBox>
+        <Label alignment="CENTER" font="$x1" layoutX="283.0" layoutY="2.0" prefHeight="25.999900000002526" text="Tipos" textOverrun="CLIP" wrapText="true" />
+      </children>
+      <padding>
+        <Insets fx:id="x2" />
+      </padding>
+    </AnchorPane>
+    <AnchorPane prefHeight="148.0" prefWidth="604.0" style="-fx-border-style: solid; -fx-border-width: 1; -fx-border-radius: 3;">
+      <children>
+        <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="38.0" prefHeight="86.0" prefWidth="576.0" spacing="10.0">
+          <children>
+            <ComboBox id="comboKey" fx:id="comboVariableKey" onAction="#selectKey" prefWidth="156.99990000000253" promptText="Key">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <TextArea fx:id="textVariableValue" disable="true" prefHeight="110.0" prefWidth="310.0" wrapText="false" />
+            <Button id="bttCancel" fx:id="butttonEditarVariable" font="$x1" minHeight="37.0" minWidth="32.0" mnemonicParsing="false" onMouseClicked="#editarVariable" prefHeight="37.0" prefWidth="32.0" text="">
+              <graphic>
+                <ImageView fitHeight="35.0" fitWidth="35.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@edit.png" />
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+          </children>
+        </HBox>
+        <Label alignment="CENTER" font="$x1" layoutX="270.0" layoutY="5.0" prefHeight="25.999900000002526" text="Variables" textOverrun="CLIP" wrapText="true" />
+      </children>
+    </AnchorPane>
+    <HBox alignment="CENTER_RIGHT" fillHeight="false" minHeight="41.0" prefHeight="86.0" prefWidth="604.0" spacing="20.0">
+      <children>
+        <Label fx:id="lblError" alignment="CENTER" font="$x1" prefHeight="64.0" prefWidth="324.0" text="Error al crear el usuario" textFill="RED" visible="false" wrapText="true" />
+        <Button id="bttCancel" fx:id="bttReset" font="$x1" minHeight="49.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#reset" prefHeight="51.0" prefWidth="178.0" text="Reset &#10;Database" textAlignment="LEFT" wrapText="false">
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="51.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@reset.png" />
+              </image>
+            </ImageView>
+          </graphic>
+          <textFill>
+            <Color blue="0.000" green="0.000" red="0.600" fx:id="x3" />
+          </textFill>
+        </Button>
+        <Button fx:id="bttCancel" font="$x1" minHeight="49.0" minWidth="51.0" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="49.0" prefWidth="51.0" text="" textFill="$x3">
+          <graphic>
+            <ImageView fitHeight="51.0" fitWidth="51.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@exit.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </children>
+      <padding>
+        <Insets fx:id="x2" />
+      </padding>
+      <VBox.margin>
+        <Insets top="10.0" />
+      </VBox.margin>
+    </HBox>
+  </children>
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" />
+  </padding>
+</VBox>

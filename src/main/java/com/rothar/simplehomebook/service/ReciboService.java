@@ -52,6 +52,10 @@ public class ReciboService {
 		});
 		return out;
 	}
+	
+	public void deleteAll() {
+		repo.deleteAll();
+	}
 
 	public boolean eliminar(Recibo r) {
 		try {

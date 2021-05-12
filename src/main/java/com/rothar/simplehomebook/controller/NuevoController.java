@@ -3,6 +3,8 @@ package com.rothar.simplehomebook.controller;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Calendar;
@@ -107,7 +109,7 @@ public class NuevoController extends Application {
 
 	private void refreshTipos() {
 		comTipo.getItems().clear();
-		comTipo.setItems(FXCollections.observableArrayList(tipoS.getAllTipos(true)));
+		comTipo.setItems(FXCollections.observableArrayList(tipoS.getAllTiposbuActualUser(true)));
 	}
 
 	@FXML
@@ -125,7 +127,7 @@ public class NuevoController extends Application {
 				} else {
 					Integer numMeses = (numMes2 - numMes1) + 1;
 					BigDecimal importe = new BigDecimal(textImporte.getText());
-					BigDecimal importePorMes = importe.divide(BigDecimal.valueOf(numMeses));
+					BigDecimal importePorMes = importe.divide(BigDecimal.valueOf(numMeses), 2, RoundingMode.HALF_UP);
 					for (Integer i = numMes1; i <= numMes2; i++) {
 						service.insertar(comAnio.getValue(), util.getNameMonth(i.toString()), comTipo.getValue(),
 								importePorMes, chkPagado.isSelected(), textUrl.getText());
@@ -181,33 +183,7 @@ public class NuevoController extends Application {
 		multipleMonth = true;
 	}
 
-	@FXML
-	private void nuevoTipo() throws IOException {
-		try {
-			if (tipoS.create(comTipo.getValue())) {
-				util.mostrarError(lblError, "Nuevo Tipo creado correctamente", true);
-				refreshTipos();
-			}
-		} catch (Exception e) {
-			util.mostrarError(lblError, "No se ha podido crear el tipo", false);
-		}
-	}
 
-	@FXML
-	private void eliminarTipo() throws IOException {
-		try {
-			if (service.existeTipo(comTipo.getValue())) {
-				util.mostrarError(lblError, "Error al borrar, tipo está en uso", false);
-			} else {
-				if (tipoS.delTipoByName(comTipo.getValue())) {
-					util.mostrarError(lblError, "Tipo borrado correctamente", true);
-					refreshTipos();
-				}
-			}
-		} catch (Exception e) {
-			util.mostrarError(lblError, e.getMessage(), false);
-		}
-	}
 
 	@FXML
 	private void salir() throws IOException {

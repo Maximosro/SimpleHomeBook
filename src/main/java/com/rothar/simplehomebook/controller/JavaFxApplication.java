@@ -32,7 +32,7 @@ public class JavaFxApplication extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws Exception {
         FxWeaver fxWeaver = applicationContext.getBean(FxWeaver.class);
         validateFirst();
         
@@ -43,7 +43,7 @@ public class JavaFxApplication extends Application {
         stage.show();
     }
 
-    private void validateFirst() {
+    private void validateFirst() throws Exception {
     	LoginService userService = applicationContext.getBean(LoginService.class);
     	if(!userService.login("root", "ootr")) {
     		userService.createUser("root", "ootr", true);

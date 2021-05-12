@@ -32,8 +32,16 @@ public class TipoService {
 				.save(new Tipo(UUID.randomUUID().toString(), name, cache.getUsuarioConectado().getUser())) != null;
 	}
 
+	public Boolean create(String name, String user) throws Exception {
+		return repository.save(new Tipo(UUID.randomUUID().toString(), name, user)) != null;
+	}
+
+	public void deleteAll() {
+		repository.deleteAll();
+	}
+
 	public Boolean delTipoByName(String name) throws Exception {
-		List<Tipo> out = repository.findAll(Example.of(new Tipo(null, name, cache.getUsuarioConectado().getUser())));
+		List<Tipo> out = repository.findAll(Example.of(new Tipo(null, name, null)));
 		if (out == null || out.isEmpty()) {
 			throw new Exception("No se ha encontrado ningun registro para borrar");
 		}
@@ -41,6 +49,15 @@ public class TipoService {
 			repository.delete(item);
 		});
 		return true;
+	}
+
+	public Boolean update(String name, String newName, String user) {
+		Tipo tipo = getTipoByNameAllUser(name);
+		tipo.setTipo(newName);
+		if (user != null) {
+			tipo.setUser(user);
+		}
+		return repository.save(tipo) != null;
 	}
 
 	public Tipo getTipoById(String id) {
@@ -56,7 +73,16 @@ public class TipoService {
 		}
 	}
 
-	public List<String> getAllTipos(boolean editable) {
+	public Tipo getTipoByNameAllUser(String name) {
+		List<Tipo> out = repository.findAll(Example.of(new Tipo(null, name, null)));
+		if (out != null && !out.isEmpty()) {
+			return out.get(0);
+		} else {
+			return new Tipo("", "", "");
+		}
+	}
+
+	public List<String> getAllTiposbuActualUser(boolean editable) {
 		List<String> listOut = new ArrayList<String>();
 		if (!editable) {
 			listOut.add("Todos");
@@ -70,4 +96,21 @@ public class TipoService {
 		return listOut;
 	}
 
+	public boolean existUserInTipos(String user) {
+		List<Tipo> out = repository.findAll(Example.of(new Tipo(null, null, user)));
+		if (out == null || out.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public List<String> getAllTipos() {
+		List<String> listOut = new ArrayList<String>();
+		List<Tipo> out = repository.findAll();
+		out.stream().forEach(tipo -> {
+			listOut.add(tipo.getTipo());
+		});
+		return listOut;
+	}
 }

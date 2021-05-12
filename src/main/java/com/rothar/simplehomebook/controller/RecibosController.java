@@ -92,7 +92,7 @@ public class RecibosController extends Application {
 	}
 	
 	private ObservableList<String> getTipos() {
-		return FXCollections.observableArrayList(tipoS.getAllTipos(false));
+		return FXCollections.observableArrayList(tipoS.getAllTiposbuActualUser(false));
 	}
 
 	@FXML

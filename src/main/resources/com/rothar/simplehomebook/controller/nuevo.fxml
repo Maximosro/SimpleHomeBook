@@ -110,7 +110,7 @@
                 <HBox prefHeight="27.0" prefWidth="395.0" spacing="10.0">
                   <children>
                     <Label prefWidth="53.0" text="Tipo" />
-                    <ComboBox id="colAnio" fx:id="comTipo" editable="true" prefWidth="119.99990000000253">
+                    <ComboBox id="colAnio" fx:id="comTipo" editable="false" prefWidth="154.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Luz" />
@@ -119,33 +119,12 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <Button id="btnAceptar" fx:id="buttonTipo" font="$x1" minHeight="25.0" minWidth="27.0" mnemonicParsing="false" onMouseClicked="#nuevoTipo" prefHeight="25.0" prefWidth="27.0" text="">
-                      <graphic>
-                        <ImageView fitHeight="27.0" fitWidth="27.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                            <Image url="@add.png" />
-                          </image>
-                        </ImageView>
-                      </graphic>
-                      <textFill>
-                        <Color blue="0.094" green="0.600" red="0.000" fx:id="x2" />
-                      </textFill>
-                    </Button>
-                    <Button id="btnLimpiar" fx:id="buttonDelTipo" font="$x1" minHeight="25.0" minWidth="24.0" mnemonicParsing="false" onMouseClicked="#eliminarTipo" prefHeight="25.0" prefWidth="24.0" text="" textFill="BLACK">
-                      <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                            <Image url="@del.png" />
-                          </image>
-                        </ImageView>
-                      </graphic>
-                    </Button>
                   </children>
                 </HBox>
                 <HBox id="btnFile" alignment="CENTER_LEFT" prefHeight="39.90234375" prefWidth="395.0" spacing="10.0">
                   <children>
                     <Label prefHeight="40.0" prefWidth="51.000099999997474" text="Url" />
-                    <TextArea fx:id="textUrl" prefHeight="40.0" prefWidth="250.0" wrapText="true" />
+                    <TextArea fx:id="textUrl" prefHeight="40.0" prefWidth="250.0" text="S/N" wrapText="true" />
                     <Button fx:id="btnFile" minHeight="27.0" minWidth="31.0" mnemonicParsing="false" onMouseClicked="#fileSearch" prefHeight="34.0" prefWidth="38.0" text="">
                       <graphic>
                         <ImageView fitHeight="46.5" fitWidth="62.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
@@ -192,7 +171,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="btnAceptar" font="$x1" layoutX="7.0" layoutY="8.0" minHeight="46.0" minWidth="38.0" mnemonicParsing="false" onMouseClicked="#aceptar" prefHeight="46.0" prefWidth="45.0" text="" textFill="$x2">
+        <Button fx:id="btnAceptar" font="$x1" layoutX="7.0" layoutY="8.0" minHeight="46.0" minWidth="38.0" mnemonicParsing="false" onMouseClicked="#aceptar" prefHeight="46.0" prefWidth="45.0" text="">
           <graphic>
             <ImageView fitHeight="45.0" fitWidth="45.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -200,6 +179,9 @@
               </image>
             </ImageView>
           </graphic>
+          <textFill>
+            <Color blue="0.094" green="0.600" red="0.000" fx:id="x2" />
+          </textFill>
         </Button>
         <Button fx:id="btnLimpiar" font="$x1" layoutX="60.0" layoutY="7.0" minHeight="39.90234375" minWidth="38.0" mnemonicParsing="false" onMouseClicked="#limpiar" prefHeight="47.0" prefWidth="45.0" text="" textFill="BLACK">
           <graphic>
