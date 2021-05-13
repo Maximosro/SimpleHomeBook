@@ -44,7 +44,7 @@ public class MenuController {
 
 	@FXML
 	public void initialize() {
-		if (!cache.getUsuarioConectado().isSuperuser()) {
+		if (!cache.getUsuarioConectado().getSuperuser().booleanValue()) {
 			buttonUsuarios.setVisible(false);
 			buttonAjustes.setVisible(false);
 		}

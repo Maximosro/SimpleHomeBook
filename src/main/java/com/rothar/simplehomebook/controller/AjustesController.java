@@ -13,6 +13,7 @@ import com.rothar.simplehomebook.service.ReciboService;
 import com.rothar.simplehomebook.service.TipoService;
 import com.rothar.simplehomebook.service.VariableService;
 import com.rothar.simplehomebook.util.Cache;
+import com.rothar.simplehomebook.util.PopUpType;
 import com.rothar.simplehomebook.util.Utils;
 import com.rothar.simplehomebook.util.WindowUtils;
 
@@ -39,15 +40,15 @@ public class AjustesController {
 	WindowUtils wUtil;
 
 	@Autowired
-	public AjustesController(LoginService usuarioService,VariableService vService, ReciboService reciboService, TipoService tipoS,Cache cache, Utils util,
-			WindowUtils wUtil) {
+	public AjustesController(LoginService usuarioService, VariableService vService, ReciboService reciboService,
+			TipoService tipoS, Cache cache, Utils util, WindowUtils wUtil) {
 		this.tipoS = tipoS;
 		this.util = util;
 		this.wUtil = wUtil;
 		this.reciboService = reciboService;
 		this.vService = vService;
-		this.usuarioService=usuarioService;
-		this.cache=cache;
+		this.usuarioService = usuarioService;
+		this.cache = cache;
 	}
 
 	@FXML
@@ -55,7 +56,7 @@ public class AjustesController {
 
 	@FXML
 	ComboBox<String> comboTipos;
-	
+
 	@FXML
 	ComboBox<String> comboUser;
 
@@ -108,7 +109,7 @@ public class AjustesController {
 	private void selectTipos() throws Exception {
 		if (comboTipos.getValue() != null) {
 			textTipo.setDisable(false);
-			
+
 			textTipo.clear();
 			if (comboTipos.getValue().equalsIgnoreCase("Nuevo Tipo")) {
 				textTipo.setText("New value");
@@ -127,7 +128,7 @@ public class AjustesController {
 		comboUser.setDisable(false);
 		Tipo tipo = tipoS.getTipoByNameAllUser(comboTipos.getValue());
 		comboUser.setValue(tipo.getUser());
-		
+
 	}
 
 	@FXML
@@ -136,8 +137,8 @@ public class AjustesController {
 			if (textTipo.getText().isEmpty()) {
 				throw new Exception();
 			} else if (comboTipos.getValue().equalsIgnoreCase("Nuevo Tipo")) {
-				if (tipoS.create(textTipo.getText(),comboUser.getValue())) {
-					util.mostrarError(lblError, "Nuevo Tipo creado correctamente", true);
+				if (tipoS.create(textTipo.getText(), comboUser.getValue())) {
+					wUtil.showLabelText(lblError, "Nuevo Tipo creado correctamente", true);
 					refreshTipos();
 					refresUser();
 					textTipo.clear();
@@ -146,7 +147,7 @@ public class AjustesController {
 				}
 			} else if (!textTipo.getText().equalsIgnoreCase("Nuevo Tipo")) {
 				if (tipoS.update(comboTipos.getValue(), textTipo.getText(), comboUser.getValue())) {
-					util.mostrarError(lblError, "Tipo " + textTipo.getText() + " actualizado correctamente", true);
+					wUtil.showLabelText(lblError, "Tipo " + textTipo.getText() + " actualizado correctamente", true);
 					refreshTipos();
 					refresUser();
 					textTipo.clear();
@@ -154,7 +155,7 @@ public class AjustesController {
 				}
 			}
 		} catch (Exception e) {
-			util.mostrarError(lblError, "No se ha podido crear/actualizar el tipo", false);
+			wUtil.showLabelText(lblError, "No se ha podido crear/actualizar el tipo", false);
 		}
 	}
 
@@ -162,7 +163,7 @@ public class AjustesController {
 	private void editarVariable() throws Exception {
 		try {
 			if (vService.crearVariable(comboVariableKey.getValue(), textVariableValue.getText())) {
-				util.mostrarError(lblError, "Variable de sistema actualiazda", true);
+				wUtil.showLabelText(lblError, "Variable de sistema actualiazda", true);
 				refreshVariables();
 				textVariableValue.clear();
 				textVariableValue.setDisable(true);
@@ -170,7 +171,7 @@ public class AjustesController {
 				throw new Exception("Error al actualizar la variable de sistema");
 			}
 		} catch (Exception e) {
-			util.mostrarError(lblError, e.getMessage(), false);
+			wUtil.showLabelText(lblError, e.getMessage(), false);
 		}
 
 	}
@@ -180,10 +181,10 @@ public class AjustesController {
 		try {
 			if (comboTipos.getValue() != null && !comboTipos.getValue().equalsIgnoreCase("Nuevo Tipo")) {
 				if (reciboService.existeTipo(comboTipos.getValue())) {
-					util.mostrarError(lblError, "Error al borrar, tipo está en uso", false);
+					wUtil.showLabelText(lblError, "Error al borrar, tipo está en uso", false);
 				} else {
 					if (tipoS.delTipoByName(comboTipos.getValue())) {
-						util.mostrarError(lblError, "Tipo borrado correctamente", true);
+						wUtil.showLabelText(lblError, "Tipo borrado correctamente", true);
 						refreshTipos();
 						refresUser();
 						textTipo.clear();
@@ -191,21 +192,25 @@ public class AjustesController {
 					}
 				}
 			} else {
-				util.mostrarError(lblError, "No se ha seleccionado ningun tipo para eliminar", false);
+				wUtil.showLabelText(lblError, "No se ha seleccionado ningun tipo para eliminar", false);
 			}
 		} catch (Exception e) {
-			util.mostrarError(lblError, e.getMessage(), false);
+			wUtil.showLabelText(lblError, e.getMessage(), false);
 		}
 	}
-	
+
 	@FXML
 	private void reset() throws IOException {
-		tipoS.deleteAll();
-		reciboService.deleteAll();
-		usuarioService.deleteAll();
-		usuarioService.createUser("root", "ootr", true);
-		util.mostrarError(lblError, "La base de datos ha sido reestablecida", false);
-		initialize();
+		wUtil.showPopUp((Stage) bttCancel.getScene().getWindow(), PopUpType.ADVERTENCIA,
+				"Se van a eliminar todos datos almacenados, y la aplicacion se reestablecera con los valores por defecto. ¿Desea continuar?.");
+		if (wUtil.aceptar) {
+			tipoS.deleteAll();
+			reciboService.deleteAll();
+			usuarioService.deleteAll();
+			usuarioService.createUser("root", "ootr", true);
+			wUtil.showLabelText(lblError, "La base de datos ha sido reestablecida", false);
+			initialize();
+		}
 	}
 
 	private void refreshTipos() {
@@ -227,7 +232,7 @@ public class AjustesController {
 			//
 		}
 	}
-	
+
 	private void refresUser() {
 		try {
 			comboUser.setDisable(false);

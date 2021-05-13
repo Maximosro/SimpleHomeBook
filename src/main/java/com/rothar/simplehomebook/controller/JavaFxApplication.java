@@ -18,49 +18,46 @@ import net.rgielen.fxweaver.core.FxWeaver;
 
 @Controller
 public class JavaFxApplication extends Application {
-	
 
-    private ConfigurableApplicationContext applicationContext;
+	private ConfigurableApplicationContext applicationContext;
 
-    @Override
-    public void init() {
-        String[] args = getParameters().getRaw().toArray(new String[0]);
+	@Override
+	public void init() {
+		String[] args = getParameters().getRaw().toArray(new String[0]);
 
-        this.applicationContext = new SpringApplicationBuilder()
-                .sources(SBApplication.class)
-                .run(args);
-    }
+		this.applicationContext = new SpringApplicationBuilder().sources(SBApplication.class).run(args);
+	}
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        FxWeaver fxWeaver = applicationContext.getBean(FxWeaver.class);
-        validateFirst();
-        
-        Parent root = fxWeaver.loadView(LoginController.class);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
-    }
+	@Override
+	public void start(Stage stage) throws Exception {
+		FxWeaver fxWeaver = applicationContext.getBean(FxWeaver.class);
+		validateFirst();
 
-    private void validateFirst() throws Exception {
-    	LoginService userService = applicationContext.getBean(LoginService.class);
-    	if(!userService.login("root", "ootr")) {
-    		userService.createUser("root", "ootr", true);
-    	}
-    	
-    	VariableService varService = applicationContext.getBean(VariableService.class);
-    	
-    	if(varService.getVariable("RECIBOS_PATH")==null) {
-    		varService.crearVariable("RECIBOS_PATH", "C:\\");
-    	}
+		Parent root = fxWeaver.loadView(LoginController.class);
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.show();
+	}
+
+	private void validateFirst() throws Exception {
+		LoginService userService = applicationContext.getBean(LoginService.class);
+		if (!userService.login("root", "ootr")) {
+			userService.createUser("root", "ootr", true);
+		}
+
+		VariableService varService = applicationContext.getBean(VariableService.class);
+
+		if (varService.getVariable("RECIBOS_PATH") == null) {
+			varService.crearVariable("RECIBOS_PATH", "C:\\");
+		}
 
 	}
 
 	@Override
-    public void stop() {
-        this.applicationContext.close();
-        Platform.exit();
-    }
+	public void stop() {
+		this.applicationContext.close();
+		Platform.exit();
+	}
 
 }

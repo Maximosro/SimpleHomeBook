@@ -101,25 +101,25 @@ public class UsuarioController {
 	private void delete() throws IOException {
 		Login item = tableUser.getSelectionModel().getSelectedItem();
 		if(item==null) {
-			util.mostrarError(lblError, "Ningun usuario seleccionado", false);
+			wUtil.showLabelText(lblError, "Ningun usuario seleccionado", false);
 		}else if(tipoS.existUserInTipos(item.getUser())) {
-			util.mostrarError(lblError, "Error: El usuario aun tiene datos asociados", false);
+			wUtil.showLabelText(lblError, "Error: El usuario aun tiene datos asociados", false);
 		}else if (service.eliminar(item)) {
 			buscar();
-			util.mostrarError(lblError, "Se ha eliminado el usuario correctamente", true);
+			wUtil.showLabelText(lblError, "Se ha eliminado el usuario correctamente", true);
 		} else {
-			util.mostrarError(lblError, "No se ha podido usuario el recibo", false);
+			wUtil.showLabelText(lblError, "No se ha podido usuario el recibo", false);
 		}
 	}
 
 	@FXML
 	private void crear() throws IOException {
 		if (service.createUser(loginUser.getText(), loginPass.getText(), chkAdmin.isSelected())) {
-			util.mostrarError(lblError, "Usuario creado correctamente", true);
+			wUtil.showLabelText(lblError, "Usuario creado correctamente", true);
 			limpiar();
 			buscar();
 		} else {
-			util.mostrarError(lblError, "Error al crear el usuario", false);
+			wUtil.showLabelText(lblError, "Error al crear el usuario", false);
 		}
 	}
 

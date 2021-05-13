@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.TypeAlias;
+
 import lombok.Data;
 
 @Data
@@ -15,9 +18,13 @@ public class Login {
 	String user;
 	
 	@Column
-	boolean superuser;
+	Boolean superuser;
 	
 	@Column
 	byte[] pass;
+
+	@Column
+	Boolean rememberThis;
+	
 	
 }

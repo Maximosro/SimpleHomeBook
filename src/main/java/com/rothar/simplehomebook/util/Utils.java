@@ -86,21 +86,6 @@ public class Utils {
 		return listaAños;
 	}
 	
-	public void mostrarError(Label lblError, String msg, boolean ok) {
-		lblError.setVisible(true);
-		lblError.setText(msg);
-		if (ok) {
-			lblError.setStyle("-fx-text-fill: green");
-		} else {
-			lblError.setStyle("-fx-text-fill: red");
-		}
-		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), ev -> {
-			lblError.setVisible(false);
-			lblError.setText(null);
-		}));
-		timeline.setCycleCount(1);
-		timeline.play();
 
-	}
 
 }

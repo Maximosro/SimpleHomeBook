@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" minHeight="187.0" onKeyPressed="#enter" prefHeight="204.00009999999747" prefWidth="432.0" spacing="0.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.rothar.simplehomebook.controller.PopUpController">
+  <children>
+    <AnchorPane minHeight="37.0" prefHeight="42.0" prefWidth="351.0">
+      <children>
+        <Label fx:id="lblTitle" alignment="CENTER" layoutX="14.0" layoutY="5.0" minHeight="37.0" prefHeight="37.0" prefWidth="411.0" text="Información" textAlignment="CENTER" underline="true">
+          <font>
+            <Font name="System Bold" size="20.0" />
+          </font>
+        </Label>
+      </children>
+      <padding>
+        <Insets />
+      </padding>
+      <VBox.margin>
+        <Insets bottom="10.0" />
+      </VBox.margin>
+    </AnchorPane>
+    <AnchorPane id="txtBody" prefHeight="92.0" prefWidth="424.0">
+      <children>
+        <TextArea id="TextArea" fx:id="txtBody" disable="false" editable="false" layoutX="7.0" layoutY="0.0" opacity="1.0" prefHeight="92.0" prefWidth="418.0" wrapText="true" />
+      </children>
+    </AnchorPane>
+    <HBox alignment="CENTER" fillHeight="false" minHeight="31.0" prefHeight="47.0001220703125" prefWidth="351.0" spacing="10.0">
+      <children>
+        <Button id="bttLogin" fx:id="bttAceptar" alignment="CENTER_LEFT" cancelButton="false" contentDisplay="LEFT" defaultButton="false" graphicTextGap="0.0" minHeight="28.0" minWidth="32.0" mnemonicParsing="false" onMouseClicked="#aceptar" prefHeight="28.0" prefWidth="129.0" text="Aceptar" textFill="#009962">
+          <font>
+            <Font name="System Bold" size="15.0" fx:id="x1" />
+          </font>
+          <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="false">
+              <image>
+                <Image url="@acept.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+        <AnchorPane prefHeight="48.0" prefWidth="141.0" />
+        <Button id="bttCancel" fx:id="bttCancelar" alignment="CENTER_LEFT" font="$x1" minHeight="28.0" minWidth="40.0001220703125" mnemonicParsing="false" onMouseClicked="#cancelar" prefHeight="28.0" prefWidth="128.0" text="Cancelar" textFill="#990000" visible="true">
+          <graphic>
+            <ImageView id="bttCancelar" fitHeight="28.000011444091797" fitWidth="29.57097031199531" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@cancel.png" />
+              </image>
+            </ImageView>
+          </graphic>
+        </Button>
+      </children>
+      <padding>
+        <Insets left="5.0" right="5.0" />
+      </padding>
+    </HBox>
+  </children>
+  <padding>
+    <Insets />
+  </padding>
+</VBox>

@@ -123,7 +123,7 @@ public class NuevoController extends Application {
 				Integer numMes1 = Integer.parseInt(util.getNumberMonth(comMes.getValue()));
 				Integer numMes2 = Integer.parseInt(util.getNumberMonth(comMes2.getValue()));
 				if (numMes1 >= numMes2) {
-					util.mostrarError(lblError, "El mes inicio es mayor o igual que el mes final", false);
+					wUtil.showLabelText(lblError, "El mes inicio es mayor o igual que el mes final", false);
 				} else {
 					Integer numMeses = (numMes2 - numMes1) + 1;
 					BigDecimal importe = new BigDecimal(textImporte.getText());
@@ -141,9 +141,9 @@ public class NuevoController extends Application {
 		} finally {
 			if (out) {
 				limpiar();
-				util.mostrarError(lblError, "Recibo creado con exito", true);
+				wUtil.showLabelText(lblError, "Recibo creado con exito", true);
 			} else {
-				util.mostrarError(lblError, "Error al crear el recibo", false);
+				wUtil.showLabelText(lblError, "Error al crear el recibo", false);
 			}
 		}
 	}

@@ -1,24 +1,24 @@
 package com.rothar.simplehomebook.service;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.rothar.simplehomebook.entity.Login;
-import com.rothar.simplehomebook.entity.Recibo;
 import com.rothar.simplehomebook.repository.LoginRepository;
 import com.rothar.simplehomebook.util.Cache;
-import com.rothar.simplehomebook.util.CryptoUtils;
+import com.rothar.simplehomebook.util.EncryptDecrypt;
 
 @Service
 public class LoginService {
 
-	@Autowired
-	CryptoUtils cryptoUtils;
+
+	@Autowired 
+	EncryptDecrypt crypto;
 
 	@Autowired
 	Cache cache;
@@ -32,10 +32,8 @@ public class LoginService {
 				return false;
 			}
 			Optional<Login> userBean = repo.findById(user);
-			byte[] cryptoPass = cryptoUtils.encodePass(pass);
-			String userBeanPass = Base64.getEncoder().encodeToString(userBean.get().getPass());
-			String userBeanPass2 = Base64.getEncoder().encodeToString(cryptoPass);
-			if (user.equals(userBean.get().getUser()) && userBeanPass2.equals(userBeanPass)) {
+			String userBeanPass = crypto.decrypt(userBean.get().getPass());
+			if (user.equals(userBean.get().getUser()) && pass.equals(userBeanPass)) {
 				cache.setUsuarioConectado(userBean.get());
 				return true;
 			} else {
@@ -49,7 +47,7 @@ public class LoginService {
 	public void deleteAll() {
 		repo.deleteAll();
 	}
-	
+
 	public boolean eliminar(Login r) {
 		try {
 			repo.delete(r);
@@ -67,17 +65,18 @@ public class LoginService {
 		});
 		return out;
 	}
-	
-	public List<Login> getAllUser(){
+
+	public List<Login> getAllUser() {
 		return repo.findAll();
 	}
 
 	public boolean createUser(String user, String pass, boolean adm) {
 		try {
 			Login l = new Login();
-			l.setPass(cryptoUtils.encodePass(pass));
+			l.setPass(crypto.encrypt(pass));
 			l.setUser(user);
 			l.setSuperuser(adm);
+			l.setRememberThis(false);
 			Login out = repo.save(l);
 			if (out == null) {
 				return false;
@@ -87,5 +86,32 @@ public class LoginService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public boolean setRecordar(String user) {
+		List<Login> users = repo.findAll();
+		users.stream().forEach(item -> {
+			if (item.getUser().equals(user)) {
+				item.setRememberThis(true);
+			} else {
+				item.setRememberThis(false);
+			}
+		});
+
+		repo.saveAll(users);
+
+		return true;
+	}
+
+	public Login getRecordar() {
+		Login logUser = new Login();
+		logUser.setRememberThis(true);
+		List<Login> out = repo.findAll(Example.of(logUser));
+		if (out != null && !out.isEmpty()) {
+			return out.get(0);
+		} else {
+			return null;
+		}
+
 	}
 }

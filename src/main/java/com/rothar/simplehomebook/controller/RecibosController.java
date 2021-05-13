@@ -105,12 +105,12 @@ public class RecibosController extends Application {
 	private void delete() throws IOException {
 		Recibo item = tblRecibos.getSelectionModel().getSelectedItem();
 		if(item==null) {
-			util.mostrarError(lblError, "Ningun recibo seleccionado", false);
+			wUtil.showLabelText(lblError, "Ningun recibo seleccionado", false);
 		}else if (service.eliminar(item)) {
 			buscar();
-			util.mostrarError(lblError, "Se ha eliminado el recibo correctamente", true);
+			wUtil.showLabelText(lblError, "Se ha eliminado el recibo correctamente", true);
 		} else {
-			util.mostrarError(lblError, "No se ha podido eliminar el recibo", false);
+			wUtil.showLabelText(lblError, "No se ha podido eliminar el recibo", false);
 		}
 	}
 
@@ -129,7 +129,7 @@ public class RecibosController extends Application {
 				if (recibo.getUrl() != null && !recibo.getUrl().isEmpty()) {
 					getHostServices().showDocument(recibo.getUrl());
 				}else {
-					util.mostrarError(lblError, "No existe recibo asociado", false);
+					wUtil.showLabelText(lblError, "No existe recibo asociado", false);
 				}
 			} else {
 				ejecutado = false;
